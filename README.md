@@ -1,3 +1,3 @@
-This is a laravel project boiler plate that contains custom built authentication features.
-I will continually add custom features neccessary to build web apps faster over time.
+This app can be used to tracked employee holidays. the Admin can accept and reject leave applications, employees also get an email to that effect.
+The app was build with laravel and css
 # leave-application-app
