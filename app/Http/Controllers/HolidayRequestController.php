@@ -14,8 +14,12 @@ class HolidayRequestController extends Controller
     {
 
         $holidays = HolidayRequest::where('user_id', Auth::user()->id)->get();
+        $remainingDays =  Auth::user()->remainingLeaveDays();
+
+
         return view('holiday.index',[
-            'holidays' => $holidays
+            'holidays' => $holidays,
+            'remainingDays' => $remainingDays
         ]);
     }
     public function create()
@@ -32,12 +36,17 @@ class HolidayRequestController extends Controller
             'reason_for_holiday' => 'required|string|max:1000',
         ]);
 
+        $startDate = Carbon::parse($request->input('start_date'));
+        $endDate = Carbon::parse($request->input('end_date'));
+        $daysTaken = $endDate->diffInDays($startDate) + 1;
+
         HolidayRequest::create([
             'user_id' => Auth::id(),
             'holiday_request_type' => $request->holiday_request_type,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
             'reason_for_holiday' => $request->reason_for_holiday,
+            'days_taken' => $daysTaken,
             'status' => 'pending',
         ]);
 

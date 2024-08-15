@@ -13,6 +13,7 @@ class HolidayRequest extends Model
         'holiday_request_type',
         'start_date',
         'end_date',
+        'days_taken',
         'reason_for_holiday',
         'status',
     ];

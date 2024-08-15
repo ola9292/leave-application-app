@@ -14,10 +14,16 @@
                 <form action="{{ route('login.store')}}" method="POST">
                     @csrf
                     <div>
-                        <input class="login-input" style="" type="email" name="email" placeholder="Enter Email">
+                        <input class="login-input" type="email" name="email" placeholder="Enter Email" value="{{ old('email') }}">
+                        @error('email')
+                            <div class="error">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div>
                         <input class="login-input" type="password" name="password" placeholder="Enter Password">
+                        @error('password')
+                            <div class="error">{{ $message }}</div>
+                        @enderror
                     </div>
                     <button type="submit">Login</button>
                 </form>

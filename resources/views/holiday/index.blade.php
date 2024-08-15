@@ -2,6 +2,7 @@
 
 @section('content')
         <div class="container-lg">
+            <p>You have {{$remainingDays}} Holidays left</p>
                 <h1>My Leave History</h1>
                 <table>
                     <tr>

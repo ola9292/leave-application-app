@@ -9,6 +9,7 @@ class Employee extends Model
 {
     use HasFactory;
     protected $fillable = ['user_id', 'phone_number', 'gender', 'department'];
+
     protected static function boot()
     {
         parent::boot();
@@ -21,6 +22,8 @@ class Employee extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+
 
 
 }

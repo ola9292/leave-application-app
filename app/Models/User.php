@@ -17,6 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    const TOTAL_LEAVE_DAYS = 30;
     protected $fillable = [
         'name',
         'email',
@@ -46,6 +47,17 @@ class User extends Authenticatable
     public function cartItems()
     {
         return $this->hasMany(Cart::class);
+    }
+    public function leaveRequests()
+    {
+        return $this->hasMany(HolidayRequest::class);
+    }
+    public function remainingLeaveDays()
+    {
+        $daysTaken = $this->leaveRequests()
+                    ->where('status', 'approved')
+                    ->sum('days_taken');
+        return self::TOTAL_LEAVE_DAYS - $daysTaken;
     }
 
 

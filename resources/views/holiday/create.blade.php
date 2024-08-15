@@ -13,33 +13,50 @@
                         {{ session('error') }}
                     </div>
                 @endif
-                <form action="{{ route('holiday.store')}}" method="POST">
+                <form action="{{ route('holiday.store') }}" method="POST">
                     @csrf
                     <div>
                         <h2 style="text-align: center">Leave Application Form</h2>
                     </div>
+
                     <div>
-                        <label for="">Select Leave Type</label>
+                        <label for="holiday_request_type">Select Leave Type</label>
                         <select class="login-input" name="holiday_request_type">
-                            <option value="sick">Sick</option>
-                            <option value="casual">Casual</option>
-                            <option value="vacation">Vacation</option>
-                            <option value="maternity">Maternity</option>
-                            <option value="others">Others</option>
+                            <option value="sick" {{ old('holiday_request_type') == 'sick' ? 'selected' : '' }}>Sick</option>
+                            <option value="casual" {{ old('holiday_request_type') == 'casual' ? 'selected' : '' }}>Casual</option>
+                            <option value="vacation" {{ old('holiday_request_type') == 'vacation' ? 'selected' : '' }}>Vacation</option>
+                            <option value="maternity" {{ old('holiday_request_type') == 'maternity' ? 'selected' : '' }}>Maternity</option>
+                            <option value="others" {{ old('holiday_request_type') == 'others' ? 'selected' : '' }}>Others</option>
                         </select>
+                        @error('holiday_request_type')
+                            <div class="error">{{ $message }}</div>
+                        @enderror
                     </div>
+
                     <div>
-                        <label for="">Start</label>
-                        <input class="login-input" type="date" name="start_date" placeholder="">
+                        <label for="start_date">Start</label>
+                        <input class="login-input" type="date" name="start_date" value="{{ old('start_date') }}">
+                        @error('start_date')
+                            <div class="error">{{ $message }}</div>
+                        @enderror
                     </div>
+
                     <div>
-                        <label for="">End</label>
-                        <input class="login-input" type="date" name="end_date" placeholder="">
+                        <label for="end_date">End</label>
+                        <input class="login-input" type="date" name="end_date" value="{{ old('end_date') }}">
+                        @error('end_date')
+                            <div class="error">{{ $message }}</div>
+                        @enderror
                     </div>
+
                     <div>
-                        <label for="">Reasons</label>
-                        <textarea class="login-input" name="reason_for_holiday"></textarea>
+                        <label for="reason_for_holiday">Reasons</label>
+                        <textarea class="login-input" name="reason_for_holiday">{{ old('reason_for_holiday') }}</textarea>
+                        @error('reason_for_holiday')
+                            <div class="error">{{ $message }}</div>
+                        @enderror
                     </div>
+
                     <button type="submit">Submit Leave Request</button>
                 </form>
             </div>
